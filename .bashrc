@@ -121,6 +121,7 @@ export DISPLAY=localhost:0
 export PATH=$PATH:~/bin
 export DOCKER_HOST='tcp://0.0.0.0:2375'
 alias docker-compose='docker-compose.exe'
+alias dokill="docker_ps_killer.sh"
 
 #wsl path 変換
 function getPWD(){
@@ -131,3 +132,6 @@ function getPWD(){
         echo $t_PWD
     fi
 }
+cd ~/
+fish
+
