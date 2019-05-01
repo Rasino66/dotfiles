@@ -1,12 +1,20 @@
-#if status --is-interactive
-#    set BASE16_SHELL "$HOME/.config/base16-shell/"
-#    source "$BASE16_SHELL/profile_helper.fish"
-#end
-
+# 生成物をおいておくところとpath
 set PATH ~/bin $PATH
-alias navi='navi.sh'
-alias docker-compose='docker-compose.exe'
 alias doki='docker_ps_killer.sh'
 alias dops='docker ps'
-set DISPLAY localhost:0
+# fishにlogin時のwelcomメッセージを削除
 set fish_greeting
+
+## windows用力技設定共
+# fishにてコマンド実行時tmuxのreload 
+function tmux_refresh --on-event fish_postexec
+  tmux refresh-client
+end
+
+# 業務用
+alias navi='navi.sh'
+# windows糞設定(alias編
+alias docker-compose='docker-compose.exe'
+# windowsのXlancherに接続する設定
+set DISPLAY localhost:0
+
