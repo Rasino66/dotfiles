@@ -133,5 +133,4 @@ function getPWD(){
     fi
 }
 cd ~/
-fish
 
