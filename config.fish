@@ -1,9 +1,11 @@
 # 生成物をおいておくところとpath
 set PATH ~/bin $PATH
+set GOPATH ~/ $GOPATH
+set PATH ~/go/bin $PATH
 # alias 設定
 alias doki='docker_ps_killer.sh'
 alias dops='docker ps'
-alias go='go.exe'
+#alias go='go.exe'
 # fishにlogin時のwelcomメッセージを削除
 set fish_greeting
 
