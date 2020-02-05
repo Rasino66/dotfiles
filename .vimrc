@@ -43,6 +43,8 @@ endif
 " Macのみ有効 -====
 if has('gui_macvim')
 endif
+
+
 "==========================================================================}}}1
 "
 " Plugins {{{1
@@ -67,6 +69,9 @@ Plug 'kana/vim-submode'
 "vimFile 関連
 Plug 'shougo/unite.vim'
 Plug 'shougo/vimfiler.vim'
+" Color
+Plug 'vim-scripts/wombat256.vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 "==========================================================================}}}1
 "
@@ -112,6 +117,16 @@ call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+"==========================================================================}}}1
+"
+" Default {{{1
+"==============================================================================
+" {{{ Colorscheme
+colorscheme wombat256mod
+" }}}
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 "==========================================================================}}}1
 "
 " Default {{{1

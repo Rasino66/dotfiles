@@ -1,0 +1,119 @@
+
+// To view the default settings, hold "alt" while clicking on the "Settings" button.
+// For documentation on these settings, see: https://aka.ms/terminal-documentation
+
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    "defaultProfile": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
+
+    "initialRows": 30,
+    "initialCols": 120,
+    "alwaysShowTabs": true, // 常時タブが表示されるようになる
+    "copyOnSelect":false, // 選択時コピーされる
+    "showTerminalTitleInTitlebar": true,
+    "experimental_showTabsInTitlebar": false,
+    "requestedTheme": "dark",
+
+
+    "profiles":
+    [
+        {
+            // Powershell.exe profile
+            "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+            "name": "Windows PowerShell",
+            "commandline": "powershell.exe",
+            "fontSize": 16,
+            "hidden": false
+        },
+        {
+            // Cmd.exe profile
+            "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+            "name": "cmd",
+            "commandline": "cmd.exe",
+            "fontSize": 16,
+            "hidden": false
+        },
+        {
+            // Ubunutu-18.04 profile
+            "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
+            "hidden": false,
+            "name": "ubuntu",
+            "commandline" : "wsl.exe ~ -d Ubuntu-18.04",
+            "fontFace": "DelugiaCode NF",
+            "fontSize": 16,
+            "colorScheme": "Molokai",
+            "schemes": "Wombat",
+            "hidden": false
+        },
+        {
+            "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+            "hidden": true, // Hide from software list
+            "name": "Azure Cloud Shell",
+            "source": "Windows.Terminal.Azure"
+        },
+        {
+            "guid": "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
+            "hidden": false,
+            "name": "Ubuntu-18.04",
+            "source": "Windows.Terminal.Wsl"
+        }
+    ],
+
+    // Add custom color schemes to this array
+    "schemes": 
+    [
+      {
+          "name": "Molokai",
+          "black": "#121212",
+          "red": "#fa2573",
+          "green": "#98e123",
+          "yellow": "#dfd460",
+          "blue": "#1080d0",
+          "purple": "#8700ff",
+          "cyan": "#43a8d0",
+          "white": "#bbbbbb",
+          "brightBlack": "#555555",
+          "brightRed": "#f6669d",
+          "brightGreen": "#b1e05f",
+          "brightYellow": "#fff26d",
+          "brightBlue": "#00afff",
+          "brightPurple": "#af87ff",
+          "brightCyan": "#51ceff",
+          "brightWhite": "#ffffff",
+          "background": "#121212",
+          "foreground": "#bbbbbb"
+      }
+    ],
+
+    // Add any keybinding overrides to this array.
+    // To unbind a default keybinding, set the command to "unbound"
+    "keybindings": [
+    { "unbound": "nextTab", "keys": [ "ctrl+tab" ] },
+    { "command": { "action": "newTab", "index": 0 }, "keys": ["ctrl+alt+1"] },
+    { "command": { "action": "newTab", "index": 1 }, "keys": ["ctrl+alt+2"] },
+    { "command": { "action": "newTab", "index": 2 }, "keys": ["ctrl+alt+3"] },
+    { "command": { "action": "newTab", "index": 3 }, "keys": ["ctrl+alt+4"] },
+    { "command": { "action": "newTab", "index": 4 }, "keys": ["ctrl+alt+5"] },
+    { "command": { "action": "newTab", "index": 5 }, "keys": ["ctrl+alt+6"] },
+    { "command": { "action": "newTab", "index": 6 }, "keys": ["ctrl+alt+7"] },
+    { "command": { "action": "newTab", "index": 7 }, "keys": ["ctrl+alt+8"] },
+    { "command": { "action": "newTab", "index": 8 }, "keys": ["ctrl+alt+9"] },
+    { "command": { "action": "newTab", "index": 9 }, "keys": ["ctrl+alt+0"] },
+    { "command": { "action": "switchToTab", "index": 0 }, "keys": ["ctrl+shift+1"] },
+    { "command": { "action": "switchToTab", "index": 1 }, "keys": ["ctrl+shift+2"] },
+    { "command": { "action": "switchToTab", "index": 2 }, "keys": ["ctrl+shift+3"] },
+    { "command": { "action": "switchToTab", "index": 3 }, "keys": ["ctrl+shift+4"] },
+    { "command": { "action": "switchToTab", "index": 4 }, "keys": ["ctrl+shift+5"] },
+    { "command": { "action": "switchToTab", "index": 5 }, "keys": ["ctrl+shift+6"] },
+    { "command": { "action": "switchToTab", "index": 6 }, "keys": ["ctrl+shift+7"] },
+    { "command": { "action": "switchToTab", "index": 7 }, "keys": ["ctrl+shift+8"] },
+    { "command": { "action": "switchToTab", "index": 8 }, "keys": ["ctrl+shift+9"] },
+    { "command": { "action": "switchToTab", "index": 9 }, "keys": ["ctrl+shift+0"] },
+    { "unbound": "toggleFullscreen", "keys": [ "alt+enter" ] },
+    { "unbound": "toggleFullscreen", "keys": [ "f11" ] },
+
+    { "command":"nextTab", "keys":["ctrl+shift+l"] },
+    { "command":"prevTab", "keys":["ctrl+shift+h"] }
+    ]
+}
