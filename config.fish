@@ -1,24 +1,25 @@
-# 生成物をおいておくところとpath
+# Ctrl+r to historl peco
+function peco_select_history_order
+  if test (count $argv) = 0
+    set peco_flags --layout=top-down
+  else
+    set peco_flags --layout=bottom-up --query "$argv"
+  end
+
+  history|peco $peco_flags|read foo
+
+  if [ $foo ]
+    commandline $foo
+  else
+    commandline ''
+  end
+end
+
+function fish_user_key_bindings
+  bind \cr 'peco_select_history_order' # Ctrl + R
+end
+
+# GoLang
 set PATH ~/bin $PATH
-set GOPATH ~/ $GOPATH
-set PATH ~/go/bin $PATH
-# alias 設定
-alias doki='docker_ps_killer.sh'
-alias dops='docker ps'
-#alias go='go.exe'
-# fishにlogin時のwelcomメッセージを削除
-set fish_greeting
-
-## windows用力技設定共
-# fishにてコマンド実行時tmuxのreload 
-#function tmux_refresh --on-event fish_postexec
-#  tmux refresh-client
-#end
-
-# 業務用
-alias navi='navi.sh'
-# windows糞設定(alias編
-alias docker-compose='docker-compose.exe'
-# windowsのXlancherに接続する設定
-set -x DISPLAY localhost:0
+set -x  GOPATH ~/ $GOPATH
 
