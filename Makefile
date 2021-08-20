@@ -14,7 +14,7 @@ BUILD_DIR:=/home/isucon/isuumo/webapp/go
 BIN_NAME:=isuumo
 
 MYSQL_CMD:=mysql -h$(DB_HOST) -P$(DB_PORT) -u$(DB_USER) -p$(DB_PASS) $(DB_NAME)
-NGX_LOG:=/tmp/access.log
+NGX_LOG:=/var/log/nginx/access.log
 MYSQL_LOG:=/tmp/slow-query.log
 
 KATARU_CFG:=./kataribe.toml
@@ -94,18 +94,20 @@ analyze: mysql-analyze nginx-analyze analyze-rotate
 
 .PHONY: mysql-analyze ## MySQLのスロークエリログをpt-query-digestに食わせる
 mysql-analyze:
+	mkdir $(HOME)/logs/analyze/
 	sudo pt-query-digest $(MYSQL_LOG) > $(HOME)/logs/analyze/mysqlAnalyze.log
 
 .PHONY: nginx-analyze ## Nginxのログをkataribeに食わせる
 nginx-analyze:
+	mkdir $(HOME)/logs/analyze/
 	sudo cat $(NGX_LOG) | kataribe -f ./kataribe.toml > $(HOME)/logs/analyze/nginxAnalyze.log
 
 .PHONY: analyze-rotate
 analyze-rotate:
 	$(eval when := $(shell date "+%s"))
 	mkdir -p $(HOME)/logs/analyze/$(when)
-	sudo cp -f $(HOME)/logs/analyze/$(when)/mysqlAnalyze.log
-	sudo cp -f $(HOME)/logs/analyze/$(when)/nginxAnalyze.log
+	sudo cp -f $(HOME)/logs/analyze/mysqlAnalyze.log $(HOME)/logs/analyze/$(when)/mysqlAnalyze.log
+	sudo cp -f $(HOME)/logs/analyze/nginxAnalyze.log $(HOME)/logs/analyze/$(when)/nginxAnalyze.log
 
 
 .PHONY: pprof ## Go言語のpprofを出力する
