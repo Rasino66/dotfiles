@@ -94,12 +94,12 @@ analyze: mysql-analyze nginx-analyze analyze-rotate
 
 .PHONY: mysql-analyze ## MySQLのスロークエリログをpt-query-digestに食わせる
 mysql-analyze:
-	mkdir $(HOME)/logs/analyze/
+	mkdir -p $(HOME)/logs/analyze
 	sudo pt-query-digest $(MYSQL_LOG) > $(HOME)/logs/analyze/mysqlAnalyze.log
 
 .PHONY: nginx-analyze ## Nginxのログをkataribeに食わせる
 nginx-analyze:
-	mkdir $(HOME)/logs/analyze/
+	mkdir -p $(HOME)/logs/analyze
 	sudo cat $(NGX_LOG) | kataribe -f ./kataribe.toml > $(HOME)/logs/analyze/nginxAnalyze.log
 
 .PHONY: analyze-rotate
