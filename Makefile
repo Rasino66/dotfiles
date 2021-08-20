@@ -69,8 +69,6 @@ journal-log-out:
 .PHONY: maji ## git_commitしてログを退避してビルド、アプリを再起動
 bench: commit log-rotate build app-restart
 
-.PHONY: analyze ## ログ系の集計結果を出力
-analyze: mysql-analyze nginx-analyze
 
 .PHONY: commit ## git_commit
 commit:
@@ -81,23 +79,34 @@ commit:
 .PHONY: log-rotate ## Nginx,MySQLのログを退避してNginx,MySQL再起動
 log-rotate:
 	$(eval when := $(shell date "+%s"))
-	mkdir -p $(HOME)/logs/$(when)
+	mkdir -p $(HOME)/logs/raw/$(when)
 	@if [ -f $(NGX_LOG) ]; then \
-	        sudo mv -f $(NGX_LOG) $(HOME)/logs/$(when)/ ; \
+	        sudo mv -f $(NGX_LOG) $(HOME)/logs/raw/$(when)/ ; \
 	fi
 	@if [ -f $(MYSQL_LOG) ]; then \
-	        sudo mv -f $(MYSQL_LOG) $(HOME)/logs/$(when)/ ; \
+	        sudo mv -f $(MYSQL_LOG) $(HOME)/logs/raw/$(when)/ ; \
 	fi
 	sudo systemctl restart nginx
 	sudo systemctl restart mysql
 
+.PHONY: analyze ## MysqlAnalyzeとNginxAnalyzeを動かしてanalyze結果を退避する
+analyze: mysql-analyze nginx-analyze analyze-rotate
+
 .PHONY: mysql-analyze ## MySQLのスロークエリログをpt-query-digestに食わせる
 mysql-analyze:
-	sudo pt-query-digest $(MYSQL_LOG)
+	sudo pt-query-digest $(MYSQL_LOG) > $(HOME)/logs/analyze/mysqlAnalyze.log
 
 .PHONY: nginx-analyze ## Nginxのログをkataribeに食わせる
 nginx-analyze:
-	sudo cat $(NGX_LOG) | kataribe -f ./kataribe.toml
+	sudo cat $(NGX_LOG) | kataribe -f ./kataribe.toml > $(HOME)/logs/analyze/nginxAnalyze.log
+
+.PHONY: analyze-rotate
+analyze-rotate:
+	$(eval when := $(shell date "+%s"))
+	mkdir -p $(HOME)/logs/analyze/$(when)
+	sudo cp -f $(HOME)/logs/analyze/$(when)/mysqlAnalyze.log
+	sudo cp -f $(HOME)/logs/analyze/$(when)/nginxAnalyze.log
+
 
 .PHONY: pprof ## Go言語のpprofを出力する
 pprof:
