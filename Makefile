@@ -22,7 +22,7 @@ KATARU_CFG:=./kataribe.toml
 PPROF:=go tool pprof -png -output pprof.png http://localhost:6060/debug/pprof/profile
 
 
-SYSTEMCTL_NAME:=isuumo.go.service
+SYSTEMCTL_NAME:=isucondition.go.service
 
 CA:=-o /dev/null -s -w "%{http_code}\n"
 
